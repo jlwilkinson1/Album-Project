@@ -1,0 +1,133 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.80.0">
+  <title>Album - {{album.album_name}}</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
+
+
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'album/assets/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+
+</head>
+
+<body style="background-color:#f8f9fa">
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Music</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+          aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'album_list' %}">Home</a>
+            </li>
+          </ul>
+          <span class="navbar-text">
+            <ul class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Search by Genre
+              </a>
+              <ul class="dropdown-menu" style="background-color: #212529;" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="{% url 'get_by_genre' %}?value=Jazz">Jazz</a></li>
+                <li><a class="dropdown-item" href="{% url 'get_by_genre' %}?value=Rock">Rock</a></li>
+                <li><a class="dropdown-item" href="{% url 'get_by_genre' %}?value=Classical">Classical</a></li>
+                <li><a class="dropdown-item" href="{% url 'get_by_genre' %}?value=Metal">Metal</a></li>
+                <li><a class="dropdown-item" href="{% url 'get_by_genre' %}?value=Reggae">Reggae</a></li>
+              </ul>
+            </ul>
+          </span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Page Content -->
+
+
+  <!-- Jumbotron Header -->
+  <section class="py-5 text-center navbar-expand-lg" style="background-color: tomato;">
+    <center><img width="600" style="padding-top: 5px; padding-bottom: 5px; " src=" {{album.album_image.url}}" alt="">
+    </center>
+  </section>
+
+  <div class="container">
+    <div class="card text-white bg-dark mb-3">
+      <center>
+        <h3 class="card-title">{{album_detail.album_name}}</h3>
+      </center>
+      <p class="lead card text-white bg-dark mb-3">{{album_detail.album_description}}</p>
+      {% for comment in object.comment_set.all %}
+      <p>{{comment.comment_social}}</p>
+      {% endfor %}
+    </div>
+  </div>
+  <div>
+    {% for track in object.tracks_set.all %}
+    <ul>
+      <li>{{track.track_name}}</li>
+    </ul>
+    {% endfor %}
+  </div>
+
+
+
+
+
+
+  <!-- Page Features -->
+
+  <!-- /.row -->
+
+  <!-- /.container -->
+
+  <!-- Footer -->
+
+  <footer class="text-muted py-5 navbar-dark bg-dark"
+    style="position: relative; bottom: 0; width: 100%; height: 120px;">
+    <div class="container">
+      <p class="float-end mb-1">
+        <a href="#">Back to top</a>
+      </p>
+      <p class="mb-1">This is where I will put footer information! </p>
+
+    </div>
+  </footer>
+
+
+  <script src="{% static 'album/assets/dist/js/bootstrap.bundle.min.js' %}"></script>
+
+
+</body>
+
+</html>
